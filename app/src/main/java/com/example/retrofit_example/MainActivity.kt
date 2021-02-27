@@ -3,9 +3,12 @@ package com.example.retrofit_example
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,8 +56,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 override fun onResponse(call: Call<currentUser>, response: Response<currentUser>) {
                     if(response.isSuccessful){
-                        Log.e("태그","로그인성공"+response.body().toString())
                         currentuser = currentUser(response.body()?.username.toString(),response.body()?.access_token!!)
+                        Log.e("태그","로그인성공, 사용자이름:"+currentuser.username+", 토큰값: "+currentuser.access_token)
                     }else{
                         Log.e("태그","로그인실패"+response.body().toString())
                     }
@@ -87,12 +90,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<Baby>, response: Response<Baby>) {
-                    if(response.isSuccessful){
-                        val jsonObject = JSONObject(response.body()!!.result) //response.body()!!.resuls 이거는 json데이터상태이다. 이걸 jsonobject라이브러리 이용해서 접근가능한 데이터로 파싱해준거임
-
-                        Log.e("태그","조회성공:"+response.body()?.success+"결과값: "+response.body()!!.result+"json파싱: "+jsonObject.getString("name")
+                    if(response.isSuccessful){                  //여기서 response.body()는 baby객체인 것이고, .result를 붙이면 String상태의? json데이터 이다. //즉 jsonObject의 인자는 String값으로 바뀐 json데이터가 와야함.
+                        val jsonObject = JSONObject(response.body()!!.result) //response.body()!!.resuls 이거는 json데이터가 String인 상태이다. 이걸 jsonobject라이브러리 이용해서 접근가능한 데이터로 파싱해준거임
+                        Log.e("태그","조회성공:"+response.body()?.success+", 결과값: "+response.body()!!.result+"json파싱: "+jsonObject.getString("name")
                                 +"json파싱: "+jsonObject.getString("inner_product"))
-
                     }else {
                         Log.e("태그","조회실패:"+response.body().toString()+"errorbody: "+response.errorBody())
                     }
@@ -100,20 +101,35 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+
       //이용자 cnts 관련 get기능-모두 조회
       button_get_param.setOnClickListener {
-          server.getAllRequest("Bearer "+currentuser.access_token).enqueue(object:Callback<Babys>{
-              override fun onFailure(call: Call<Babys>, t: Throwable) {   //object로 받아옴. 서버에서 받은 object모델과 맞지 않으면 실패함수로 빠짐
-                  Log.e("태그","통신 아예 실패")
-              }
-              override fun onResponse(call: Call<Babys>, response: Response<Babys>) {
-                  if(response.isSuccessful){
-                      Log.e("태그","모두조회 성공:"+response.body())
-                  }else {
-                      Log.e("태그","모두조회 실패:"+response.body().toString()+"errorbody: "+response.errorBody())
+          server.getAllRequest("Bearer " + currentuser.access_token)
+              .enqueue(object : Callback<Babys> {
+                  override fun onFailure(
+                      call: Call<Babys>,
+                      t: Throwable
+                  ) {
+                      Log.e("태그", "통신 아예 실패")
                   }
-              }
-          })
+
+                  override fun onResponse(call: Call<Babys>, response: Response<Babys>) {
+                      if (response.isSuccessful) {
+
+                          val jsonArray = JSONArray(response.body()?.result.toString())  //(response.body()?.result.toString()은 대괄호([])로 시작해서 여러 jsonobject있는 String임
+                          //간단히 설명하면 JSONObject는 중괄호({})로 시작한 애들로 key/value 의 형태를 가지고 있는 애들이다.
+                          //JSONArray는 대괄호([])로 시작하는 애들로, JSONObject값들을 가지고 있음.
+
+                          for (i in 0..jsonArray.length() - 1) {
+                              val iObject = jsonArray.getJSONObject(i)
+                              Log.e("태그-모두조회성공", "사용자이름:" + iObject?.getString("name") + ", 사용자 deactivated" + iObject.getBoolean("deactivated"))
+                          }
+                      } else {
+                          Log.e("태그", "모두조회 실패:" + response.body().toString() + "errorbody: " + response.errorBody()
+                          )
+                      }
+                  }
+              })
       }
 
 
