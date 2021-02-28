@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="POST_register"
-        app:layout_constraintBottom_toTopOf="@+id/button_update"
+        app:layout_constraintBottom_toTopOf="@+id/button_log"
         app:layout_constraintStart_toStartOf="@+id/button_get_param"
         app:layout_constraintTop_toBottomOf="@+id/button_get_param" />
 
@@ -54,24 +54,48 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_update"
+        android:id="@+id/button_log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
         android:text="logs_get"
-        app:layout_constraintBottom_toTopOf="@+id/button_delete"
-        app:layout_constraintEnd_toEndOf="@+id/button_delete"
+        app:layout_constraintBottom_toTopOf="@+id/button_logAdd"
+        app:layout_constraintEnd_toEndOf="@+id/button_logAdd"
         app:layout_constraintTop_toBottomOf="@+id/button_post" />
 
     <Button
-        android:id="@+id/button_delete"
+        android:id="@+id/button_logAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="logs_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/button_post"
         app:layout_constraintStart_toStartOf="@+id/button_post"
-        app:layout_constraintTop_toBottomOf="@+id/button_update" />
+        app:layout_constraintTop_toBottomOf="@+id/button_log" />
+
+    <Button
+        android:id="@+id/button_getAllLog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이용자별 전체 log조회" />
+
+    <Button
+        android:id="@+id/button_AddCnt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이용자 추가" />
+
+    <Button
+        android:id="@+id/button_deleteCnt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이용자 삭제" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </LinearLayout>

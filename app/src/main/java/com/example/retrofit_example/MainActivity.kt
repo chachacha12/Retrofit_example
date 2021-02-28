@@ -182,9 +182,21 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
-        
 
-
+        //이용자 삭제 delete기능-cnt삭제
+        button_deleteCnt.setOnClickListener {
+            server.deleteCntRequest("Bearer "+currentuser.access_token, "SPVBcoLmFtZ8OJfO9F0V").enqueue(object :Callback<success>{
+                override fun onFailure(call: Call<success>, t: Throwable) {
+                }
+                override fun onResponse(call: Call<success>, response: Response<success>) {
+                    if(response.isSuccessful){
+                        Log.e("태그   이용자 삭제성공: ",response.body()?.succeed.toString())
+                    }else{
+                        Log.e("태그   이용자 삭제실패: ",response.body()?.succeed.toString())
+                    }
+                }
+            })
+        }
 
 
 

@@ -49,8 +49,8 @@ interface HowlService {      //서버로 오고가는 api들을 관리해주는 
     fun addCntResquest(@Header("Authorization")authorization:String, @Body cnt: Cnt):Call<success>
 
     //이용자 삭제
-    @DELETE("api/cnts/:cnt_id")
-    fun deleteCntRequest(@Header("Authorization")authorization:String, @Body cnt: Cnt):Call<success>
+    @DELETE("api/cnts/{cnt_id}")
+    fun deleteCntRequest(@Header("Authorization")authorization:String,@Path("cnt_id") cnt_id: String):Call<success>
 
 
 
