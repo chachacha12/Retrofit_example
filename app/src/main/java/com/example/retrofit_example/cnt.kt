@@ -1,6 +1,0 @@
-package com.example.retrofit_example
-
-import com.google.gson.annotations.SerializedName
-
-data class cnt(@SerializedName("inner_product")var inner_product:String, @SerializedName("deactivated")var deactivated:Boolean, @SerializedName("description")var description:String, @SerializedName("name")var name:String, @SerializedName("outer_product")var outer_product:String, @SerializedName("birth")var birth:String ) {
-}
