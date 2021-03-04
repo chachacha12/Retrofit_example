@@ -2,8 +2,8 @@ package com.example.retrofit_example
 
 import com.google.gson.annotations.SerializedName
 
-data class Log(@SerializedName("cnt") var cnt:String, @SerializedName("time") var time:String, @SerializedName("inner_opened") var inner_opened:Number,
-               @SerializedName("inner_new") var inner_new:Number, @SerializedName("outer_opened") var outer_opened:Number, @SerializedName("outer_new") var outer_new:Number,
-               @SerializedName("comment") var comment:String) {
+data class Log(@SerializedName("cnt") var cnt: String? =null, @SerializedName("time") var time: String? =null, @SerializedName("inner_opened") var inner_opened:Number? =null,
+               @SerializedName("inner_new") var inner_new:Number? =null, @SerializedName("outer_opened") var outer_opened:Number? =null, @SerializedName("outer_new") var outer_new:Number? =null,
+               @SerializedName("comment") var comment:String? =null) {
 
 }

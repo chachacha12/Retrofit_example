@@ -7,8 +7,9 @@ import retrofit2.http.*
 //이때 안드스튜디오에서 그 result값을 받을수있는 모델이 있어야함. 그래서 지금 이 data class가 그 모델역할.
 //data class ResponseDTO(var result:String?=null)
 
-
 interface HowlService {      //서버로 오고가는 api들을 관리해주는 인터페이스임  //서버와 앱 간의 연결역할..?
+
+    //서버에 보내야할 값들 중, 헤더는 @Header로, 파라미터는 @Path로 , Request body는 @Body라는 annotation으로 보내주기
 
     //사용자 등록
     //post는 @Field는 FormData형식으로 보냄. @Body는 json으로 서버에 보내줌.
@@ -25,14 +26,12 @@ interface HowlService {      //서버로 오고가는 api들을 관리해주는 
     fun logoutRequest(@Body currentUser: currentUser):Call<success>
 
     //이용자 조회
-    //@Headers("Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTQxNjA1ODIsIm5iZiI6MTYxNDE2MDU4MiwianRpIjoiZWI3MGQ2ZTAtMTRlZC00NDdiLTg4ZDAtM2NjODc1ZDdkMjVjIiwiZXhwIjoxNjE0NzY1MzgyLCJpZGVudGl0eSI6ImFhIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIiwidXNlcl9jbGFpbXMiOnsibGV2ZWwiOjF9LCJjc3JmIjoiNzMyMzMwN2MtMWI4Yi00MzJhLWI3YWQtNDcwYWVkYzQ3NTNkIn0.6RVX6G_S-0AKm_ex-obiiSfgNOFTQq6RPfePJVAqjZE")
-    @GET("api/cnts/{cnt_id}")
+   @GET("api/cnts/{cnt_id}")   //서버의 문서에선 : 이라고 되어있는 부분은 여기선 {}로 묶어줘야함
     fun getRequest(@Header("Authorization")authorization:String, @Path("cnt_id") cnt_id: String): Call<GetOne>
 
 
     //이용자 모두조회
-    //@Headers("Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTQxNjA1ODIsIm5iZiI6MTYxNDE2MDU4MiwianRpIjoiZWI3MGQ2ZTAtMTRlZC00NDdiLTg4ZDAtM2NjODc1ZDdkMjVjIiwiZXhwIjoxNjE0NzY1MzgyLCJpZGVudGl0eSI6ImFhIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIiwidXNlcl9jbGFpbXMiOnsibGV2ZWwiOjF9LCJjc3JmIjoiNzMyMzMwN2MtMWI4Yi00MzJhLWI3YWQtNDcwYWVkYzQ3NTNkIn0.6RVX6G_S-0AKm_ex-obiiSfgNOFTQq6RPfePJVAqjZE")
-    @GET("api/cnts")
+   @GET("api/cnts")
     fun getAllRequest(@Header("Authorization")authorization:String): Call<GetAll>
 
 
@@ -54,26 +53,48 @@ interface HowlService {      //서버로 오고가는 api들을 관리해주는 
 
 
 
+    //이용자Log 정보 수정
+    @PATCH("api/logs/{log_id}")
+    fun modifiy_log(@Header("Authorization")authorization:String,@Path("log_id") log_id: String, @Body log: Log) :Call<success>
 
 
-
-
-
-
-
-
-    /*
-    //이용자 정보 수정
-    @PATCH("api/cnts/{cnt_id}")
-    fun modifiy_cnt(@Header("Authorization")authorization:String, @Body cnt: Cnt):Call<success>
-     */
-
-
-    /*
-    //이용자별 전체 로그 조회
+    //이용자별 전체 로그 조회 (ex.상윤이의 모든 log값을 가져오고 싶을때 씀)
     @GET("api/logs/cnt/{cnt_id}")
     fun getAllLogRequest(@Header("Authorization")authorization:String, @Path("cnt_id") cnt_id: String): Call<GetAll>
+
+
+
+
+
+    //이용자별 로그 리스트 조회 (페이지네이션)
+    @GET("api/logs/cnt/:cnt_id?page={page}&size={size}")
+    fun getLogListRequest(@Header("Authorization")authorization:String, @Path("cnt_id") cnt_id: String, @Path("page") page: Number, @Path("size") size: Number): Call<GetAll>
+
+
+
+
+
+
+
+    /*
+    //사용자 삭제
+    @DELETE("api/users/{user_id}")
+    fun deleteUserRequest(@Header("Authorization")authorization:String,@Path("cnt_id") cnt_id: String):Call<success>
      */
+
+/*
+    //이용자 정보 수정
+    @PATCH("api/cnts/{cnt_id}")
+    fun modifiy_cnt(@Header("Authorization")authorization:String,@Path("cnt_id") cnt_id: String, @Body cnt: Cnt) :Call<success>
+
+
+ */
+
+
+
+
+
+
 
 
 /*
