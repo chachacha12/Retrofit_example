@@ -120,6 +120,23 @@
             android:layout_height="wrap_content"
             android:text="이용자 Log 리스트조회(페이지네이션)" />
 
+            <Button
+                android:id="@+id/button_getLog_period"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="특정기간 이용자별 로그조회(개수지정가능)" />
+
+            <Button
+                android:id="@+id/button_getAllLog_period"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="특정기간 이용자 전체 로그 조회" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
     </ScrollView>

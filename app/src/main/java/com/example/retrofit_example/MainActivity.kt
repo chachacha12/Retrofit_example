@@ -322,11 +322,69 @@ class MainActivity : AppCompatActivity() {
 
                             for (i in 0..jsonArray.length() - 1) {
                                 val iObject = jsonArray.getJSONObject(i)
-                                Log.e("태그", "특정 이용자:" + iObject)
-
+                                Log.e("태그", "로그 객체하나:" + iObject)
                             }
+
                         } else {
                             Log.e("태그", "전체 로그 조회실패" + response.body().toString())
+                        }
+                    }
+                })
+        }
+
+
+
+        //특정기간 이용자 로그리스트 조회 (페이지네이션) - 가져올 로그 개수 지정 가능?
+        button_getLog_period.setOnClickListener {
+            server.getLog_period_Request("Bearer " + currentuser.access_token, "OA7KtWMhycQFuG9k6Bys",0,1,"2020-01-01 09:00","2022-01-01 09:00")
+                .enqueue(object : Callback<GetAll> {
+                    override fun onFailure(
+                        call: Call<GetAll>,
+                        t: Throwable
+                    ) {  //object로 받아옴. 서버에서 받은 object모델과 맞지 않으면 실패함수로 빠짐
+                        Log.e("태그", "통신 아예 실패")
+                    }
+
+                    override fun onResponse(call: Call<GetAll>, response: Response<GetAll>) {
+                        if (response.isSuccessful) {
+                            val jsonArray = JSONArray(response.body()?.result.toString())
+                            Log.e("태그", "이용자 기간 로그리스트 조회성공:" + jsonArray)
+
+                            for (i in 0..jsonArray.length() - 1) {
+                                val iObject = jsonArray.getJSONObject(i)
+                                Log.e("태그", "로그 객체하나:" + iObject)
+                            }
+
+                        } else {
+                            Log.e("태그", "기간 로그 조회실패" + response.body().toString())
+                        }
+                    }
+                })
+        }
+
+
+        //특정기간 이용자 전체 로그리스트 조회
+        button_getAllLog_period.setOnClickListener {
+            server.getAllLog_period_Request("Bearer " + currentuser.access_token, "OA7KtWMhycQFuG9k6Bys","2020-01-01 09:00","2022-01-01 09:00")
+                .enqueue(object : Callback<GetAll> {
+                    override fun onFailure(
+                        call: Call<GetAll>,
+                        t: Throwable
+                    ) {  //object로 받아옴. 서버에서 받은 object모델과 맞지 않으면 실패함수로 빠짐
+                        Log.e("태그", "통신 아예 실패")
+                    }
+
+                    override fun onResponse(call: Call<GetAll>, response: Response<GetAll>) {
+                        if (response.isSuccessful) {
+                            val jsonArray = JSONArray(response.body()?.result.toString())
+                            Log.e("태그", "이용자 기간 로그 전체 조회성공:" + jsonArray)
+
+                            for (i in 0..jsonArray.length() - 1) {
+                                val iObject = jsonArray.getJSONObject(i)
+                                Log.e("태그", "로그 객체하나:" + iObject)
+                            }
+                        } else {
+                            Log.e("태그", "특정기간 이용자 전체 로그 조회실패" + response.body().toString())
                         }
                     }
                 })
@@ -340,6 +398,34 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
+
+
+
+
+
+
+        /*
+        //사용자 삭제 delete기능-user삭제
+        button_deleteUser.setOnClickListener {
+            server.deleteUserRequest("Bearer " + currentuser.access_token, "iU2BnccguJBnFhqzoXpJ")
+                .enqueue(object : Callback<success> {
+                    override fun onFailure(call: Call<success>, t: Throwable) {
+                        Log.e("태그: ", "서버 통신 아예 실패")
+                    }
+
+                    override fun onResponse(call: Call<success>, response: Response<success>) {
+                        if (response.isSuccessful) {
+                            Log.e("태그   사용자 삭제성공: ", response.body()?.succeed.toString())
+                        } else {
+                            Log.e("태그   사용자 삭제실패: ", response.body()?.succeed.toString())
+                        }
+                    }
+                })
+        }
+
+         */
 
         /*
        //이용자 정보수정 PATCH기능-cnt수정
