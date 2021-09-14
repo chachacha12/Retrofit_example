@@ -20,122 +20,13 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-        <Button
-            android:id="@+id/button_post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="사용자등록"
-            app:layout_constraintBottom_toTopOf="@+id/button_log"
-            app:layout_constraintStart_toStartOf="@+id/button_get_param"
-            app:layout_constraintTop_toBottomOf="@+id/button_get_param" />
 
-        <Button
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="login" />
-
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="logout"
-            tools:layout_editor_absoluteX="156dp"
-            tools:layout_editor_absoluteY="400dp" />
-
-        <Button
-            android:id="@+id/button_deleteUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="사용자 삭제" />
-
-        <Button
-            android:id="@+id/button_get_param"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="이용자 모두 조회"
-            app:layout_constraintBottom_toTopOf="@+id/button_post"
-            app:layout_constraintStart_toStartOf="@+id/button_get"
-            app:layout_constraintTop_toBottomOf="@+id/button_get" />
-
-        <Button
-            android:id="@+id/button_get"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이용자조회"
-            app:layout_constraintBottom_toTopOf="@+id/button_get_param"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button_log"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            android:text="logs_get"
-            app:layout_constraintBottom_toTopOf="@+id/button_logAdd"
-            app:layout_constraintEnd_toEndOf="@+id/button_logAdd"
-            app:layout_constraintTop_toBottomOf="@+id/button_post" />
-
-        <Button
-            android:id="@+id/button_logAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="logs_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/button_post"
-            app:layout_constraintStart_toStartOf="@+id/button_post"
-            app:layout_constraintTop_toBottomOf="@+id/button_log" />
-
-        <Button
-            android:id="@+id/button_getAllLog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이용자별 전체 log조회" />
-
-        <Button
-            android:id="@+id/button_AddCnt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이용자 추가" />
-
-        <Button
-            android:id="@+id/button_deleteCnt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이용자 삭제" />
-
-        <Button
-            android:id="@+id/button_PatchLog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이용자 log정보수정" />
-
-        <Button
-            android:id="@+id/button_getLogList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이용자 Log 리스트조회(페이지네이션)" />
 
             <Button
-                android:id="@+id/button_getLog_period"
+                android:id="@+id/button_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="특정기간 이용자별 로그조회(개수지정가능)" />
-
-            <Button
-                android:id="@+id/button_getAllLog_period"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="특정기간 이용자 전체 로그 조회" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:text="음식사진 조회" />
 
 
         </LinearLayout>
